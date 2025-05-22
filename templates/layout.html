@@ -4,7 +4,7 @@
     <!--Clases Meta-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!--CSS-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     
@@ -39,14 +39,13 @@
         </ul>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('login') }}">Iniciar Sesion</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('register') }}">Registrarse</a>
+                <a class="nav-link" href="{{ url_for('carrito') }}">
+                    <img src="{{ url_for('static', filename='img/shopping_cart.png') }}" alt="a">
+                </a>
             </li>
         </ul>
     </nav>
-    <div class="container">
+    <div class="container pt-3">
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}

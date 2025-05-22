@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="pt-3">
+    <div class="card">
+        <div class="card-header fs-2">
+            Carrito de Compras
+        </div>
+        <ul class="list-group list-group-flush">
+        {% if data.mensaje == 'No existen productos en el Carro'%}
+            <li class="list-group-item text-center fs-2" style="padding-top: 15rem; padding-bottom: 15rem;">
+                {{ data.mensaje }} <img src="{{ url_for('static', filename='img/production_quantity.png') }}" alt="">
+            </li>
+        {% else %}
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+        {% endif %}
+        </ul>
+        <div class="card-footer">
+            <div class="row align-items-start">
+                <div class="col">
+                    <p class="text-sm-start">Total Compra</p>
+                </div>
+                <div class="col">
+                {% if data.mensaje == 'No existen productos en el Carro'%}
+                    <p class="text-sm-end">$ -</p>
+                {% else %}
+                    <p class="text-sm-end">$ </p>
+                    <a href="#" class="btn btn-secondary">Relizar Pago</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

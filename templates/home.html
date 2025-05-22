@@ -1,4 +1,65 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Home Page</h1>
+<div class="row pt-3">
+    {% if data.mensaje == 'Productos Obtenidos' %}
+        {% for producto in data.productos %}
+            {% if producto.sucursal == "CACFerremasSTGO01" %}
+                <div class="pt-3 col-4 mb-3 mb-sm-0">
+                    <div class="card">
+                            <div class="row justify-content-center">
+                                <img src="{{ producto.img_producto }}" class="card-img-top" style="height: 20rem; width: 22rem;" alt="Product_Image">
+                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <p class="text-sm-start">COD-{{ producto.codigo_producto }}</p>
+                                </div>
+                                <div class="col">
+                                {% if stock == 0 %}
+                                    <p class="text-sm-end text-danger">No Disponible</p>
+                                {% else %}
+                                    <p class="text-sm-end">{{ producto.stock }} Unid.</p>
+                                {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="row align-items-start">
+                                <div class="col">
+                                    <p class="card-text text-sm-start">{{ producto.marca_producto }}</p>
+                                </div>
+                                <div class="col">
+                                    <p class="card-text text-sm-end text-black">$ {{ producto.valor }}</p>        
+                                </div>
+                            </div>
+
+                            <p class="card-text">{{ producto.descripcion }}</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <form action="/agregar_carrito_ui" method="POST">
+                                    <input type="hidden" name="producto_id" value="{{ producto.id_producto }}">
+                                    <label for="cantidad">Cantidad:</label>
+                                    <input type="number" name="cantidad" min="1" value="1">
+                                    <button type="submit" class="btn btn-primary">Agregar al carrito</button>
+                                </form>
+
+                                    {% if stock == 0 %}
+                                        <button type="submit" class="btn btn-primary disabled">
+                                            Agregar al Carrito <img src="{{ url_for('static', filename='img/add_circle.png') }}" alt="">
+                                        </a>
+                                    {% else %}
+                                        <button type="submit" class="btn btn-primary">
+                                            Agregar al Carrito <img src="{{ url_for('static', filename='img/add_circle.png') }}" alt="">
+                                        </a>
+                                    {% endif %}
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
 {% endblock %}
